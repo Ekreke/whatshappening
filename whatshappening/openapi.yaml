@@ -1,0 +1,82 @@
+# Generated with protoc-gen-openapi
+# https://github.com/google/gnostic/tree/master/cmd/protoc-gen-openapi
+
+openapi: 3.0.3
+info:
+    title: ""
+    version: 0.0.1
+paths:
+    /helloworld/{name}:
+        get:
+            tags:
+                - Greeter
+            description: Sends a greeting
+            operationId: Greeter_SayHello
+            parameters:
+                - name: name
+                  in: path
+                  required: true
+                  schema:
+                    type: string
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/helloworld.v1.HelloReply'
+    /stats/wordcount:
+        get:
+            tags:
+                - Rank
+            description: Sends a greeting
+            operationId: Rank_WordCount
+            parameters:
+                - name: plantforms
+                  in: query
+                  schema:
+                    type: array
+                    items:
+                        type: string
+                - name: isExclude
+                  in: query
+                  schema:
+                    type: boolean
+                - name: limit
+                  in: query
+                  schema:
+                    type: integer
+                    format: int32
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/whatshappening.v1.WordCountReply'
+components:
+    schemas:
+        helloworld.v1.HelloReply:
+            type: object
+            properties:
+                message:
+                    type: string
+            description: The response message containing the greetings
+        whatshappening.v1.WordCountReply:
+            type: object
+            properties:
+                code:
+                    type: integer
+                    format: int32
+                message:
+                    type: string
+                data:
+                    type: object
+                    additionalProperties:
+                        type: integer
+                        format: int32
+tags:
+    - name: Greeter
+      description: The greeting service definition.
+    - name: Rank
+      description: The greeting service definition.

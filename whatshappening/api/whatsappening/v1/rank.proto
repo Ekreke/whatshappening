@@ -1,0 +1,32 @@
+syntax = "proto3";
+
+package whatshappening.v1;
+
+import "google/api/annotations.proto";
+
+option go_package = "whatshappening/api/whatshappening/v1;v1";
+option java_multiple_files = true;
+option java_package = "dev.kratos.api.whatshappening.v1";
+
+
+// The greeting service definition.
+service Rank {
+  // Sends a greeting
+  rpc WordCount (WordCountRequest) returns (WordCountReply) {
+    option (google.api.http) = {
+      get: "/stats/wordcount"
+    };
+  }
+}
+
+message WordCountRequest {
+  repeated string plantforms = 1;
+  bool is_exclude = 2;
+  int32 limit = 3;
+}
+
+message WordCountReply {
+  int32 code = 1;
+  string message = 2;
+  map<string, int32> data = 3;
+}
